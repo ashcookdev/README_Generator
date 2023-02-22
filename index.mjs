@@ -1,7 +1,7 @@
 import inquirer from 'enquirer';
 import fs from "fs/promises";
 
-let { title, description, table_of_contents, github_user, github_repo, installation, usage, license, contributions,tests,questions } = await inquirer
+let { title, description, github_user, github_repo, installation, usage, license, contributions,tests,contact } = await inquirer
     .prompt([
         {
             name: 'title',
@@ -23,11 +23,7 @@ let { title, description, table_of_contents, github_user, github_repo, installat
                     type: 'input',
                     message: "What is the name of your repository?",
                     },
-            {
-                name: 'table_of_contents',
-                type: 'input',
-                message: "Table of Contents?",
-                },
+               
                 {
                     name: 'installation',
                     type: 'input',
@@ -57,7 +53,7 @@ choices : ['MIT', 'IBM','Mozilla']},
                             message: "Have you performed any tests?",
                             },
                             {
-                                name: 'questions',
+                                name: 'contact',
                                 type: 'input',
                                 message: "Please Enter your email?",
                                 },
@@ -79,21 +75,8 @@ choices : ['MIT', 'IBM','Mozilla']},
                     generateLicense()                    
 
 
-
-// // * The title of my project 
-// * Sections entitled:
-// * Description 
-// * Table of Contents 
-// * Installation 
-// * Usage 
-// * License 
-// * Contributing 
-// * Tests 
-// * Questions
-
-
 let htmlText = `
-## ${title}
+## Title: ${title}
 
 ## Repository
 "https://github.com/${github_user}/${github_repo}/
@@ -102,9 +85,15 @@ let htmlText = `
 ${description}
 
 ## Table of Contents
-${table_of_contents}
-
-## Screenshots
+1. [Title](#Title)
+2. [Repository](#Repository)
+3. [Description](#Description)
+4. [Installation](#Installation)
+5. [Usage](#Usage)
+6. [License Badge](#License)
+7. [Contributions](#Contributions)
+8. [Tests](#Tests)
+9. [Contact Us](#Contact)
 
 
 ## Installation
@@ -113,7 +102,7 @@ ${installation}
 ## Usage
 ${usage}
 
-## License Badge
+## License
 ${license}
 
 ## Contributions
@@ -122,8 +111,8 @@ ${contributions}
 ## Tests
 ${tests}
 
-## Questions
-${questions}
+## Contact
+${contact}
 `
 
 await fs.writeFile("README.md", htmlText)
